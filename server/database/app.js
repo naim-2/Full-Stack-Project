@@ -79,10 +79,10 @@ app.get('/fetchDealers/:state', async (req, res) => {
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
   try {
-    const document = await Dealerships.findOne({ id: req.params.id });
-    res.json(document);
+    const documents = await Dealerships.find({ id: req.params.id });
+    res.json(documents);
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching document' });
+    res.status(500).json({ error: 'Error fetching dealers by ID' });
   }
 });
 
@@ -90,18 +90,18 @@ app.get('/fetchDealer/:id', async (req, res) => {
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
   data = JSON.parse(req.body);
   const documents = await Reviews.find().sort( { id: -1 } )
-  let new_id = documents[0]['id']+1
+  let new_id = documents[0].id + 1
 
   const review = new Reviews({
-		"id": new_id,
-		"name": data['name'],
-		"dealership": data['dealership'],
-		"review": data['review'],
-		"purchase": data['purchase'],
-		"purchase_date": data['purchase_date'],
-		"car_make": data['car_make'],
-		"car_model": data['car_model'],
-		"car_year": data['car_year'],
+		id: new_id,
+		name: data.name,
+        dealership: data.dealership,
+        review: data.review,
+        purchase: data.purchase,
+        purchase_date: data.purchase_date,
+        car_make: data.car_make,
+        car_model: data.car_model,
+        car_year: data.car_year,
 	});
 
   try {
