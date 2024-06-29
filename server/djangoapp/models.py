@@ -30,8 +30,8 @@ class CarMake(models.Model):
 # - Any other fields you would like to include in car model
 # - __str__ method to print a car make object
 class CarModel(models.Model):
-    car_make = models.ForeignKey(CarMake, 
-        on_delete=models.CASCADE)  # Many-to-One relationship
+    car_make = models.ForeignKey(CarMake,
+                                 on_delete=models.CASCADE)  # Many-to-One relationship
     name = models.CharField(max_length=100)
     CAR_TYPES = [
         ('SEDAN', 'Sedan'),
@@ -43,8 +43,8 @@ class CarModel(models.Model):
         ('VAN', 'Van'),
     ]
     type = models.CharField(
-        max_length=12, 
-        choices=CAR_TYPES, 
+        max_length=12,
+        choices=CAR_TYPES,
         default='SUV'
     )
     year = models.IntegerField(
